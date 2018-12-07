@@ -64,8 +64,10 @@ async def meme(ctx):
     embed.set_image(url = random.choice(choices))
     await client.send_typing(ctx.message.channel)
     await client.send_message(ctx.message.channel, embed=embed)
-    async def botdm(ctx, user: discord.Member, *, msg: str):
+ 
+@commands.check(is_dark)
+async def botdm(ctx, user: discord.Member, *, msg: str):
     await client.send_typing(user)
     await client.send_message(user, msg)
-    
+
 client.run(os.getenv('Token'))
