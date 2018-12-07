@@ -65,6 +65,7 @@ async def meme(ctx):
     await client.send_typing(ctx.message.channel)
     await client.send_message(ctx.message.channel, embed=embed)
  
+@client.command(pass_context = True)
 @commands.check(is_dark)
 async def botdm(ctx, user: discord.Member, *, msg: str):
     await client.send_typing(user)
@@ -80,6 +81,6 @@ async def dm(ctx, user: discord.Member, *, msg: str):
         await client.say("Aw, come on! You thought you could get away with DM'ing people without permissions.")
     except:
         await client.say("Error :x:. Make sure your message is shaped in this way: ^dm [tag person] [msg]")    
-    
+
 
 client.run(os.getenv('Token'))
