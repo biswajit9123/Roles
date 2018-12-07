@@ -31,7 +31,18 @@ async def on_ready():
     print('Created by Poko')
     client.loop.create_task(status_task())
 
+def is_dark(ctx):
+    return ctx.message.author.id == "514856260353392660"
 
+@client.event
+async def on_message(message):
+    channel = client.get_channel('519797154705965058')
+    if message.server is None and message.author != client.user:
+        await client.send_message(channel, '{} : <@{}> : '.format(message.author.name, message.author.id) + message.content)
+    await client.process_commands(message)
+
+    
+    
 @client.event
 async def on_member_join(member):
     role = discord.utils.get(member.server.roles, name='★彡-Guest-彡★')
@@ -53,5 +64,8 @@ async def meme(ctx):
     embed.set_image(url = random.choice(choices))
     await client.send_typing(ctx.message.channel)
     await client.send_message(ctx.message.channel, embed=embed)
+    async def botdm(ctx, user: discord.Member, *, msg: str):
+    await client.send_typing(user)
+    await client.send_message(user, msg)
     
 client.run(os.getenv('Token'))
