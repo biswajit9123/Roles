@@ -1,6 +1,8 @@
 import discord
 import asyncio
-import os
+import os 
+import random
+import colorsys
 from discord.ext.commands import Bot
 
 client = Bot(description="poko", command_prefix="*", pm_help = False)
