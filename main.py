@@ -15,7 +15,7 @@ async def on_ready():
     print('--------')
     print('--------')
     print('Started <Poko>') 
-    return await client.change_presence(game=discord.Game(name='<Roles>')) 
+    return await client.change_presence(game=discord.Game(name='<polo||*meme>')) 
 
 
 @client.event
