@@ -81,6 +81,6 @@ async def dm(ctx, user: discord.Member, *, msg: str):
     except discord.ext.commands.MissingPermissions:
         await client.say("Aw, come on! You thought you could get away with DM'ing people without permissions.")
     except:
-        await client.say("Error :x:. Make sure your message is shaped in this way: ^dm [tag person] [msg]")
+        await client.say("Error :x:. Make sure your message is shaped in this way: *dm [tag person] [msg]")
 
 client.run(os.getenv('Token'))
