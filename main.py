@@ -69,5 +69,17 @@ async def meme(ctx):
 async def botdm(ctx, user: discord.Member, *, msg: str):
     await client.send_typing(user)
     await client.send_message(user, msg)
+    
+@commands.has_permissions(administrator = True)
+async def dm(ctx, user: discord.Member, *, msg: str):
+    try:
+        await client.send_message(user, msg)
+        await client.delete_message(ctx.message)          
+        await client.say("Success! Your DM has made it! :white_check_mark: ")
+    except discord.ext.commands.MissingPermissions:
+        await client.say("Aw, come on! You thought you could get away with DM'ing people without permissions.")
+    except:
+        await client.say("Error :x:. Make sure your message is shaped in this way: ^dm [tag person] [msg]")    
+    
 
 client.run(os.getenv('Token'))
