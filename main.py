@@ -196,15 +196,42 @@ async def dm(ctx, user: discord.Member, *, msg: str):
         await client.say("Error :x:. Make sure your message is shaped in this way: *dm [tag person] [msg]")
 
 @client.command(pass_context = True)
-async def botinvite(ctx):
-    await client.say('https://discordapp.com/api/oauth2/authorize?client_id=518672070377209857&permissions=8&scope=bot')
-
-@client.command(pass_context = True)
 async def test(ctx):
     if ctx.message.author.bot:
       return
     else:
       await client.send_message(ctx.message.author, 'Hii bro what supp')
       await client.say('Check your dm ')	
+	
+@client.command(pass_context = True)
+async def play(ctx, *, url):
+    author = ctx.message.author
+    voice_channel = author.voice_channel
+    try:
+        vc = await client.join_voice_channel(voice_channel)
+        msg = await client.say("Loading...")
+        player = await vc.create_ytdl_player("ytsearch:" + url)
+        player.start()
+        await client.say("Succesfully Loaded ur song!")
+        await client.delete_message(msg)
+    except Exception as e:
+        print(e)
+        await client.say("Reconnecting")
+        for x in client.voice_clients:
+            if(x.server == ctx.message.server):
+                await x.disconnect()
+                nvc = await client.join_voice_channel(voice_channel)
+                msg = await client.say("Loading...")
+                player2 = await nvc.create_ytdl_player("ytsearch:" + url)
+                player2.start
+
+@client.command(pass_context = True)
+async def stop(ctx):
+    for x in client.voice_clients:
+        if(x.server == ctx.message.server):
+            return await x.disconnect()
+
+    return await client.say("I am not playing anyting???!")
+
 	
 client.run(os.getenv('Token'))
