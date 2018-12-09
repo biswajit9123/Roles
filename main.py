@@ -171,7 +171,17 @@ async def thinking2(ctx):
 async def happy(ctx):
     await client.delete_message(ctx.message)
     await client.say('<a:happy:516183323052212236>')
-		
+	
+@client.command(pass_context = True)
+@commands.has_permissions(kick_members=True)
+async def warn(ctx, userName: discord.User, *, message:str): 
+    if userName.server_permissions.kick_members:
+        await client.say('**He is mod/admin and i am unable to warn him/her**')
+        return
+    else:
+      await client.send_message(userName, "You have been warned for: **{}**".format(message))
+      await client.say(":warning: __**{0} Has Been Warned!**__ :warning: ** Reason:{1}** ".format(userName,message))
+      pass	
 	    
 @client.command(pass_context = True)
 @commands.has_permissions(administrator = True)
