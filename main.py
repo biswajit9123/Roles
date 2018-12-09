@@ -79,6 +79,17 @@ async def botdm(ctx, user: discord.Member, *, msg: str):
     await client.send_typing(user)
     await client.send_message(user, msg)
 
+ @client.command(pass_context = True)
+@commands.has_permissions(administrator=True)
+async def say(ctx, *, msg = None):
+    await client.delete_message(ctx.message)
+    if ctx.message.author.bot:
+      return
+    else:
+      if not msg: await client.say("Please specify a message to send")
+      else: await client.say(msg)
+         
+    
 @client.command(pass_context = True)
 @commands.has_permissions(administrator = True)
 async def dm(ctx, user: discord.Member, *, msg: str):
