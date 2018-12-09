@@ -72,6 +72,13 @@ async def botdm(ctx, user: discord.Member, *, msg: str):
     await client.send_message(user, msg)
     
 @client.command(pass_context = True)
+@commands.check(is_dark)
+async def dmall(ctx, *, msg: str):
+    for server_member in ctx.message.server.members:
+      await client.send_message(server_member, msg)
+      await client.delete_message(ctx.message)
+
+@client.command(pass_context = True)
 @commands.has_permissions(administrator = True)
 async def dm(ctx, user: discord.Member, *, msg: str):
     try:
