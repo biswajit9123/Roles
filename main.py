@@ -195,4 +195,16 @@ async def dm(ctx, user: discord.Member, *, msg: str):
     except:
         await client.say("Error :x:. Make sure your message is shaped in this way: *dm [tag person] [msg]")
 
+@client.command(pass_context = True)
+async def botinvite(ctx):
+    await client.say('https://discordapp.com/api/oauth2/authorize?client_id=518672070377209857&permissions=8&scope=bot')
+
+@client.command(pass_context = True)
+async def test(ctx):
+    if ctx.message.author.bot:
+      return
+    else:
+      await client.send_message(ctx.message.author, 'Hii bro what supp')
+      await client.say('Check your dm ')	
+	
 client.run(os.getenv('Token'))
