@@ -41,6 +41,7 @@ async def on_message(message):
         await client.send_message(channel, '{} : <@{}> : '.format(message.author.name, message.author.id) + message.content)
     await client.process_commands(message)
 
+async def on_message(message):
     user = message.author
     if message.author.bot:
       return
