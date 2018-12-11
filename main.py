@@ -36,12 +36,7 @@ def is_dark(ctx):
 
 @client.event
 async def on_message(message):
-    channel = client.get_channel('519797154705965058')
-    if message.server is None and message.author != client.user:
-        await client.send_message(channel, '{} : <@{}> : '.format(message.author.name, message.author.id) + message.content)
-    await client.process_commands(message)
-
-async def on_message(message):
+    async def on_message(message):
     user = message.author
     if message.author.bot:
       return
